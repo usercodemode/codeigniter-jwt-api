@@ -58,27 +58,13 @@ class AuthFilter implements FilterInterface
 
 
         $key = getenv('JWT_SECRET');
-        // $header = $this->request->server('HTTP_AUTHORIZATION');
         $token = isset($_SERVER['HTTP_AUTHORIZATION']) ? $_SERVER['HTTP_AUTHORIZATION'] : '';
-
-        // $token = null;
-        // $token = $header;
-        
-
-        // extract the token from the header
-        // if (!empty($header)) {
-        //     if (preg_match('/Bearer\s(\S+)/', $header, $matches)) {
-        //         $token = $matches[1];
-        //     }
-        // }
 
         // check if token is null or empty
         if (is_null($token) || empty($token)) {
 
             $response = service('response');
             $response->setBody('Access denied');
-            // $response->setBody($header);
-
             $response->setStatusCode(401);
             return $response;
         }
@@ -90,8 +76,6 @@ class AuthFilter implements FilterInterface
 
             $response = service('response');
             $response->setBody('Access denied');
-            // $response->setBody($header);
-
             $response->setStatusCode(401);
             return $response;
         }
